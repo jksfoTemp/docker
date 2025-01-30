@@ -1,0 +1,77 @@
+
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+# If you use an Ubuntu derivative distro, such as Linux Mint, you may need to use
+# UBUNTU_CODENAME instead of VERSION_CODENAME.
+
+
+jku@jkMain:/etc$ sudo apt update
+Ign:1 https://mirrors.ocf.berkeley.edu/linuxmint-packages virginia InRelease
+Hit:2 https://packages.microsoft.com/repos/code stable InRelease
+Hit:3 https://mirrors.ocf.berkeley.edu/linuxmint-packages virginia Release
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:5 https://download.docker.com/linux/ubuntu virginia InRelease
+Ign:6 https://releases.warp.dev/linux/deb stable InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu jammy InRelease
+Err:8 https://download.docker.com/linux/ubuntu virginia Release
+  404  Not Found [IP: 2600:9000:234b:fe00:3:db06:4200:93a1 443]
+Hit:9 https://releases.warp.dev/linux/deb stable Release
+Hit:11 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:12 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+E: The repository 'https://download.docker.com/linux/ubuntu virginia Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+
+
+# To install the latest version, run:
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Verify that the Docker Engine installation is successful by running the hello-world image.
+
+ sudo docker run hello-world
+
+# This command downloads a test image and runs it in a container. When the container runs, it prints a confirmation message and exits.
+
+*/
+
+
+
+ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
+  ./docker-ce_<version>_<arch>.deb \
+  ./docker-ce-cli_<version>_<arch>.deb \
+  ./docker-buildx-plugin_<version>_<arch>.deb \
+  ./docker-compose-plugin_<version>_<arch>.deb
+
+# bad containerd.io_1.6.9-1_amd64.deb \
+
+ sudo dpkg -i ./containerd.io_1.6.33-1_amd64.deb \
+ ./docker-ce_26.1.4-1~ubuntu.22.04~jammy_amd64.deb \
+ ./docker-ce-cli_26.1.4-1~ubuntu.22.04~jammy_amd64.deb \
+ ./docker-buildx-plugin_0.14.1-1~ubuntu.22.04~jammy_amd64.deb \
+ ./docker-compose-plugin_2.6.0~ubuntu-jammy_amd64.deb
+
+
+sudo apt-get install ./docker-desktop-4.30.0-amd64.deb
+
+# double click, required ~37 additional packages
+sudo apt update
+
+Ubuntu 24.04 LTS is not yet supported, Docker Desktop will fail to start. Due to a change in how the latest Ubuntu release restricts the unprivileged namespaces, sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 needs to be ran at least once. Refer to the Ubuntu Blog for more details.vb
+
+
+#
